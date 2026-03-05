@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HADI KHAN // F1 Portfolio Dashboard 🏎️
 
-## Getting Started
+A high-performance, F1-inspired personal portfolio website designed for a Computer Engineering student. Built with the **Mercedes-AMG Petronas 2026** aesthetic in mind: Matte Midnight Black, Silver, and Petronas Teal.
 
-First, run the development server:
+## 🏁 Track Specs (Tech Stack)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework**: [Next.js 14+](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Typography**: [Titillium Web](https://fonts.google.com/specimen/Titillium+Web) (Headers) & [Inter](https://fonts.google.com/specimen/Inter) (Body)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏎️ Aerodynamics & Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🚥 Sector 1: Home Dashboard
+- **Driver Profile**: Technical ID (HK1205) with real-time skill telemetry.
+- **Commit Telemetry**: Live-data visualization of coding activity and performance.
+- **Power Unit**: Technical mapping of the development stack to modular engine components (ICE, MGU-H, etc.).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🚥 Sector 2: Engineering Bay (Projects)
+- **Technical Data Sheets**: Detailed logs for projects like **QuantOptions Visualizer** and **Housing Price Predictor**.
+- **DRS Animation**: Innovative "DRS Open" hover effect revealing technical source links.
 
-## Learn More
+### 🚥 Sector 3: Pit Wall (Experience)
+- **Track Map Timeline**: A vertical season-by-season progression of professional stints.
+- **Performance KPIs**: Quantifiable impact metrics for roles at OMA, NASTECH, and Microsoft.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Installation & Pit Stop
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the chassis**:
+   ```bash
+   git clone <repository-url>
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Refuel dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Ignition (Development)**:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Qualifying (Production Build)**:
+   ```bash
+   npm run build
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📜 Metadata & SEO
+Optimized for visibility with high-performance metadata tags, open-graph support, and accessible semantic HTML.
+
+---
+*Built with precision engineering for the 2026 season.*
