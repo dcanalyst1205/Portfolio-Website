@@ -1,0 +1,66 @@
+﻿
+> portfolio-website@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 6.9s
+  Running TypeScript ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/8) ...
+node.exe : The 
+width(-1) and 
+height(-1) of chart 
+should be greater than 
+0,
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (The width(-1)   
+  a...greater than     
+0,:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+       please check 
+the style of 
+container, or the 
+props width(100%) and 
+height(100%),
+       or add a 
+minWidth(0) or 
+minHeight(undefined) 
+or use 
+aspect(undefined) to 
+control the
+       height and 
+width.
+  Generating static pages using 15 workers (2/8) 
+  Generating static pages using 15 workers (4/8) 
+  Generating static pages using 15 workers (6/8) 
+Γ£ô Generating static pages using 15 workers (8/8) in 1609.5ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /bio
+Γö£ Γùï /contact
+Γö£ Γùï /experience
+Γöö Γùï /projects
+
+
+Γùï  (Static)  prerendered as static content
+
