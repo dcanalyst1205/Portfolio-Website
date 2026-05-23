@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Barlow:wght@300;400;500&display=swap');
+
+/* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
+:root {
+  /* Mercedes-AMG color system — strict hierarchy */
+  --black:        #0a0a0a;
+  --black-2:      #111111;
+  --black-3:      #1a1a1a;
+  --gray-dark:    #2a2a2a;
+  --gray-mid:     #444444;
+  --gray-muted:   #666666;
+  --gray-subtle:  #999999;
+  --silver:       #c0c0c0;
+  --silver-light: #e0e0e0;
+  --white:        #f5f5f0;
+
+  /* Accent — used sparingly, ~2% of palette */
+  --teal:         #00d2be;
+  --teal-dim:     #00a090;
+  --teal-ghost:   rgba(0, 210, 190, 0.08);
+  --teal-border:  rgba(0, 210, 190, 0.25);
+
+  /* Functional */
+  --bg:           var(--black);
+  --bg-surface:   var(--black-2);
+  --bg-raised:    var(--black-3);
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-mid:   rgba(255, 255, 255, 0.12);
+  --border-hi:    rgba(255, 255, 255, 0.2);
+
+  /* Typography */
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body:    'Barlow', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* Layout */
+  --content-max: 1200px;
+  --nav-h: 56px;
+  --rail-w: 40px;
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--silver-light);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  /* Subtle grid texture — replaces plain solid bg */
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ─── TYPOGRAPHY SCALE ────────────────────────────────────────────────────── */
+
+/* Display — section titles, hero headline */
+.f-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Label — nav items, badges, metadata */
+.f-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+}
+
+/* Mono data — telemetry values, stats */
+.f-data {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ─── LEFT RAIL ───────────────────────────────────────────────────────────── */
+/* A persistent 40px vertical strip on the left — AMG branding detail */
+.left-rail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rail-w);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: var(--black-2);
+}
+
+.left-rail__text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.left-rail__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin: var(--sp-5) 0;
+  flex-shrink: 0;
+}
+
+/* ─── NAVIGATION ──────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: var(--rail-w);
+  right: 0;
+  height: var(--nav-h);
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-6);
+  z-index: 100;
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.nav__logo-accent {
+  color: var(--teal);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+
+/* Sector number prefix — small, muted */
+.nav__link-num {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  opacity: 0.7;
+  line-height: 1;
+}
+
+/* Actual label — clear and readable */
+.nav__link-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-subtle);
+  transition: color 0.15s;
+}
+
+.nav__link:hover .nav__link-label,
+.nav__link.active .nav__link-label {
+  color: var(--white);
+}
+
+.nav__link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: var(--sp-4);
+  right: var(--sp-4);
+  height: 1px;
+  background: var(--teal);
+}
+
+/* Status chip — top right of nav */
+.nav__status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--gray-muted);
+}
+
+.nav__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ─── PAGE LAYOUT ─────────────────────────────────────────────────────────── */
+.page {
+  margin-left: var(--rail-w);
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* ─── SECTION HEADERS ──────────────────────────────────────────────────────  */
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-7);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.section-header::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+}
+
+.section-subtitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gray-muted);
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  /* aligns to baseline of title */
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal);
+  margin-left: auto;
+  padding-bottom: 4px;
+}
+
+/* ─── PROJECT CARDS ────────────────────────────────────────────────────────  */
+/* Data-sheet aesthetic — NOT a generic card */
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px; /* flush stack with gap-line between */
+  background: var(--border);
+}
+
+.project-card {
+  background: var(--bg);
+  padding: var(--sp-6) var(--sp-6);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-4);
+  align-items: start;
+  position: relative;
+  transition: background 0.2s;
+  overflow: hidden;
+}
+
+.project-card::before {
+  /* Sector color stripe — left edge */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.project-card:hover {
+  background: var(--bg-surface);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* Header row inside card */
+.project-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.project-card__ref {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.project-card__status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gray-muted);
+  text-transform: uppercase;
+  border: 1px solid var(--border-mid);
+  padding: 2px 6px;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: var(--sp-3);
+}
+
+.project-card__desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray-subtle);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: var(--sp-4);
+}
+
+/* Tags — monospace brackets, not pill badges */
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.project-card__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray-muted);
+  letter-spacing: 0.04em;
+}
+
+.project-card__tag::before { content: '['; }
+.project-card__tag::after  { content: ']'; }
+
+/* Right column — metadata */
+.project-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-2);
+  min-width: 120px;
+}
+
+.project-card__year {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--gray-dark);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.project-card__link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-muted);
+  text-decoration: none;
+  border: 1px solid var(--border-mid);
+  padding: var(--sp-2) var(--sp-3);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.project-card__link:hover {
+  color: var(--teal);
+  border-color: var(--teal-border);
+  background: var(--teal-ghost);
+}
+
+/* ─── TELEMETRY BAR ────────────────────────────────────────────────────────  */
+/* A small live-data strip — replaces the spammy STATUS/DRS/LATENCY badges */
+.telemetry-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-6);
+  background: var(--black-2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.telemetry-item__key {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--gray-muted);
+  text-transform: uppercase;
+}
+
+.telemetry-item__val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--silver);
+}
+
+.telemetry-item__val--accent {
+  color: var(--teal);
+}
+
+.telemetry-divider {
+  width: 1px;
+  height: 12px;
+  background: var(--border-mid);
+  flex-shrink: 0;
+}
+
+/* ─── HERO SECTION ────────────────────────────────────────────────────────── */
+.hero {
+  padding: var(--sp-9) 0 var(--sp-8);
+  position: relative;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 10vw, 140px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 0.9;
+  margin-bottom: var(--sp-5);
+}
+
+.hero__name span {
+  /* Second line — slightly smaller, silver */
+  display: block;
+  font-size: clamp(40px, 6vw, 88px);
+  color: var(--silver);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.hero__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gray-subtle);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: var(--sp-7);
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--sp-3) var(--sp-5);
+  border: 1px solid;
+  transition: all 0.15s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.btn--primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--black);
+}
+
+.btn--primary:hover {
+  background: transparent;
+  color: var(--teal);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border-mid);
+  color: var(--gray-subtle);
+}
+
+.btn--ghost:hover {
+  border-color: var(--silver);
+  color: var(--white);
+}
+
+/* ─── SKILL / STAT STRIP ──────────────────────────────────────────────────── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: var(--sp-7) 0;
+}
+
+.stat-item {
+  background: var(--bg);
+  padding: var(--sp-5);
+}
+
+.stat-item__val {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: var(--sp-1);
+}
+
+.stat-item__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gray-muted);
+  text-transform: uppercase;
+}
+
+/* ─── EXPERIENCE / TIMELINE ───────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: var(--sp-7);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border-mid);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--sp-7);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--sp-7));
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 1px solid var(--teal);
+  transform: translateX(calc(-3px + 0.5px));
+}
+
+.timeline-item__period {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+
+.timeline-item__role {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.timeline-item__company {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-muted);
+  margin-bottom: var(--sp-4);
+}
+
+.timeline-item__desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray-subtle);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ─── CONTACT SECTION ─────────────────────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.contact-item {
+  background: var(--bg);
+  padding: var(--sp-6);
+  text-decoration: none;
+  transition: background 0.2s;
+  display: block;
+}
+
+.contact-item:hover {
+  background: var(--bg-surface);
+}
+
+.contact-item__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+
+.contact-item__value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────────────── */
+.footer {
+  margin-top: var(--sp-9);
+  padding: var(--sp-5) var(--sp-6);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+}
+
+/* ─── SCROLLBAR ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gray-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-mid); }
+
+/* ─── SELECTION ───────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--teal);
+  color: var(--black);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --rail-w: 0px; }
+
+  .left-rail { display: none; }
+
+  .nav {
+    left: 0;
+    padding: 0 var(--sp-4);
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card__meta {
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__name {
+    font-size: clamp(48px, 12vw, 80px);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav__links { display: none; }
+}

@@ -1,67 +1,47 @@
 import type { Metadata } from "next";
-import { Inter, Titillium_Web } from "next/font/google";
 import "./globals.css";
-import TelemetryBar from "@/components/layout/TelemetryBar";
-import SystemStatus from "@/components/layout/SystemStatus";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const titillium = Titillium_Web({
-  variable: "--font-titillium",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
-  display: "swap",
-});
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "HADI KHAN // Portfolio Dashboard",
+  metadataBase: new URL("https://portfolio-website-two-khaki-79.vercel.app"),
+  title: {
+    default: "Hadi Khan — Computer Engineering @ UWaterloo",
+    template: "%s — Hadi Khan",
+  },
   description:
-    "High-performance portfolio dashboard for Hadi Khan, a Computer Engineering student at the University of Waterloo. Built with precision engineering and Mercedes-AMG Petronas F1 aesthetics.",
-  keywords: [
-    "Hadi Khan",
-    "University of Waterloo",
-    "Computer Engineering",
-    "Software Engineer",
-    "Azure",
-    "Next.js",
-    "F1 Portfolio",
-  ],
-  authors: [{ name: "Hadi Khan" }],
+    "Portfolio of Hadi Khan, Computer Engineering student at the University of Waterloo. Building precise, performant software.",
   openGraph: {
-    title: "HADI KHAN // Portfolio Dashboard",
-    description: "Computer Engineering student @ UWaterloo — F1 inspired.",
     type: "website",
+    locale: "en_CA",
+    url: "https://portfolio-website-two-khaki-79.vercel.app",
+    siteName: "Hadi Khan",
+    title: "Hadi Khan — Computer Engineering @ UWaterloo",
+    description:
+      "Portfolio of Hadi Khan, Computer Engineering student at the University of Waterloo.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hadi Khan — Computer Engineering @ UWaterloo",
+    description:
+      "Portfolio of Hadi Khan, Computer Engineering student at the University of Waterloo.",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${titillium.variable} antialiased min-h-screen bg-[#0A0A0A] text-[#E5E5E5]`}
-        style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-      >
-        {/* Grid Background */}
-        <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
-
-        {/* Navigation */}
-        <TelemetryBar />
-
-        {/* Main Content */}
-        <main className="relative z-10 pt-16 pb-12 min-h-screen">
-          {children}
-        </main>
-
-        {/* System Status Bar */}
-        <SystemStatus />
+    <html lang="en">
+      {/*
+        Fonts are loaded via @import in globals.css (Barlow Condensed, Barlow,
+        JetBrains Mono). No next/font needed since we're using Google Fonts CDN
+        directly for simplicity — swap to next/font if you want better LCP.
+      */}
+      <body>
+        <Navbar />
+        {children}
       </body>
     </html>
   );
